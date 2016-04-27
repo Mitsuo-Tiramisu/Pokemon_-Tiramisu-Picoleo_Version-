@@ -4,17 +4,23 @@ abstract class Pokemon {
 	int HP;
 	String tipo;
 	Ataque[] ataques = new Ataque[4];
+	static int[][] efectividade;
 
-	public Pokemon(String nome, int HP, String tipo1, String tipo2){
+	public Pokemon(String nome, int HP, String tipo){
 
 		this.nome = nome;
 		this.HP = HP;
-		this.tipo1 = tipo1;
-		this.tipo2 = tipo2;
-	}
-
-	public Pokemon(String nome, int HP, String tipo1){
-		this(nome,HP,tipo1,null);
+		this.tipo = tipo;
+		this.efectividade[][] = {
+			{0,  0,  0,  0,  0,  0,  0,  0},//NORMAL
+			{0, -1, -1,  0,  1,  0,  0,  0},//FIRE
+			{0,  1, -1,  0, -1,  0,  0,  0},//WATER
+			{0,  0,  1, -1, -1,  0,  1,  0},//ELETRIC
+			{0, -1,  1,  0, -1,  0, -1,  0},//GRASS
+			{1,  0,  0,  0,  0,  0, -1, -1},//FIGHTING
+			{0,  0,  0, -1,  1,  1,  0,  0},//FLYING
+			{0,  0,  0,  0,  0,  1,  0, -1} //PSYCHIC
+		}
 	}
 
 }
