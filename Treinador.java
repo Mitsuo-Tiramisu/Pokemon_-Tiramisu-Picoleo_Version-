@@ -49,13 +49,11 @@ abstract class Treinador {
 		}
 		
 		else if(pokemonAtual.atualHP == 0){
-			System.out.println("O pokemon "+pokemonAtual.nome+" foi  gravemente ferido!");
-			euEscolhoVoce();
+			//System.out.println("O pokemon "+pokemonAtual.nome+" foi  gravemente ferido!");
 			return 1;
 		}
 		
 		else if(pokemonAtual.atualHP <= 10){
-			pokemonAtual.cura();
 			return 2;
 		}
 		
@@ -63,6 +61,14 @@ abstract class Treinador {
 			return 3;
 		}
 		
+	}
+
+	public void fugir() {
+		System.out.println(nome+" fugiu da batalha!");
+	}
+
+	public void ganhou() {
+		System.out.println(nome+" ganhou a batalha!!");
 	}
 	
 }

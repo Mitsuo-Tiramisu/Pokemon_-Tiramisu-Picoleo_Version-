@@ -1,4 +1,3 @@
-
 class Batalha {
 	
 	public static void Atacando(Treinador t, Pokemon adversario){
@@ -8,59 +7,84 @@ class Batalha {
 	
 	public static void main(String[] args){
 		
-		boolean flag = true;
+		boolean flag = true, morreu = false;
 		int escolha1,escolha2;
 		Treinador1 t1 = new Treinador1("Leo");
 		Treinador2 t2 = new Treinador2("Mit");
-		
+		Event e1 = null,e2 = null;
 		
 		t1.euEscolhoVoce();
 		t2.euEscolhoVoce();
 		t1.defineAtaque(t2.pokemonAtual);
 		t2.defineAtaque(t1.pokemonAtual);
 		
-		while(flag){
+		for(int round=1;flag;round++){
 			
-			t1.pokemonAtual.imprimeVida();
-			t2.pokemonAtual.imprimeVida();
+			if(!morreu) {
+				System.out.println("");
+				System.out.println("ROUND "+round);
+				t1.pokemonAtual.imprimeVida();
+				t2.pokemonAtual.imprimeVida();
+			}
+			else morreu = false;
 			
 			escolha1 = t1.oQueFarei();
 			escolha2 = t2.oQueFarei();
-
 			
 			if(escolha1 == 0){
-				System.out.println("O treinador "+t2.nome+" venceu a partida!");
+				e1 = new Fugir(0);
+				e1.action(t1, t2);
 				flag = false;
+				continue;
 			}
 			
-			else if(escolha2 == 0){
-				System.out.println("O treinador "+t1.nome+" venceu a partida!");
+			if(escolha2 == 0){
+				e2 = new Fugir(0);
+				e1.action(t2, t1);
 				flag = false;
+				continue;
 			}
 			
-			else{
-				
-				if(escolha1 == 1){
-					t2.defineAtaque(t1.pokemonAtual);
-					escolha1 = 3;
-				}
-				
-				if(escolha2 == 1){
-					t1.defineAtaque(t2.pokemonAtual);
-					escolha2 = 3;
-				}
-				
-				if(escolha1 == 3){
-					if(t1.pokemonAtual.atualHP > 0){
-						Batalha.Atacando(t1, t2.pokemonAtual);
-					}
-				}
-				
-				if(escolha2 == 3){
-					if(t2.pokemonAtual.atualHP > 0){
-						Batalha.Atacando(t2, t1.pokemonAtual);
-					}
+			if(escolha1 == 1){
+				e1 = new TrocarPokemon(1);
+				t2.defineAtaque(t1.pokemonAtual);
+				escolha2 = -1;
+			}
+			
+			if(escolha2 == 1){
+				e2 = new TrocarPokemon(1);
+				t1.defineAtaque(t2.pokemonAtual);
+				escolha1 = -1;
+			}
 
+			if(escolha1 == 2){
+				e1 = new Curar(2);
+			}
+			
+			if(escolha2 == 2){
+				e2 = new Curar(2);
+			}
+			
+			if(escolha1 == 3){
+				e1 = new Atacar(3);
+			}
+			
+			if(escolha2 == 3){
+				e2 = new Atacar(3);
+			}
+			
+			if(e1.getPrio() <= e2.getPrio()){
+				e1.action(t1, t2);
+				if(t2.pokemonAtual.atualHP < 0) morreu = true;
+				if(!morreu){
+					e2.action(t2, t1);
+				}
+			}
+			else{
+				e2.action(t2, t1);
+				if(t1.pokemonAtual.atualHP < 0) morreu = true;
+				if(!morreu){
+					e1.action(t1, t2);
 				}
 				
 			}
