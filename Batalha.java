@@ -26,7 +26,10 @@ class Batalha {
 				t1.pokemonAtual.imprimeVida();
 				t2.pokemonAtual.imprimeVida();
 			}
-			else morreu = false;
+			else{
+				morreu = false;
+				round--;
+			}
 			
 			escolha1 = t1.oQueFarei();
 			escolha2 = t2.oQueFarei();
@@ -40,21 +43,25 @@ class Batalha {
 			
 			if(escolha2 == 0){
 				e2 = new Fugir(0);
-				e1.action(t2, t1);
+				e2.action(t2, t1);
 				flag = false;
 				continue;
 			}
 			
 			if(escolha1 == 1){
 				e1 = new TrocarPokemon(1);
+				e1.action(t1, t2);
 				t2.defineAtaque(t1.pokemonAtual);
-				escolha2 = -1;
+				t1.defineAtaque(t2.pokemonAtual);
+				continue;
 			}
 			
 			if(escolha2 == 1){
 				e2 = new TrocarPokemon(1);
+				e2.action(t2, t1);
 				t1.defineAtaque(t2.pokemonAtual);
-				escolha1 = -1;
+				t2.defineAtaque(t1.pokemonAtual);
+				continue;
 			}
 
 			if(escolha1 == 2){
@@ -75,18 +82,19 @@ class Batalha {
 			
 			if(e1.getPrio() <= e2.getPrio()){
 				e1.action(t1, t2);
-				if(t2.pokemonAtual.atualHP < 0) morreu = true;
+				if(t2.pokemonAtual.atualHP <= 0) morreu = true;
 				if(!morreu){
 					e2.action(t2, t1);
 				}
+				if(t1.pokemonAtual.atualHP <= 0) morreu = true;
 			}
 			else{
 				e2.action(t2, t1);
-				if(t1.pokemonAtual.atualHP < 0) morreu = true;
+				if(t1.pokemonAtual.atualHP <= 0) morreu = true;
 				if(!morreu){
 					e1.action(t1, t2);
 				}
-				
+				if(t2.pokemonAtual.atualHP <= 0) morreu = true;
 			}
 		}
 		

@@ -44,12 +44,11 @@ abstract class Treinador {
 	}
 	
 	public int oQueFarei(){
-		if(nxt == 6){
+		if(pokemonAtual.atualHP == 0 && nxt == 6){
 			return 0;
 		}
 		
 		else if(pokemonAtual.atualHP == 0){
-			//System.out.println("O pokemon "+pokemonAtual.nome+" foi  gravemente ferido!");
 			return 1;
 		}
 		
@@ -79,7 +78,7 @@ class Treinador1 extends Treinador{
 	public Treinador1(String nome) {	
 		super(nome);
 		pokemons[0] = new Bulbasaur("Bulba");
-		pokemons[1] = new Snorlax("Snor");
+		pokemons[1] = new Wartortle("Snor");
 		pokemons[2] = new Mewtwo("Mew");
 		pokemons[3] = new Pikachu("Pika");
 		pokemons[4] = new Butterfree("Butter");
@@ -94,7 +93,7 @@ class Treinador2 extends Treinador{
 		super(nome);
 		pokemons[0] = new Hitmonchan("Hitmon");
 		pokemons[1] = new Charizard("Chari");
-		pokemons[2] = new Wartortle("Warto");
+		pokemons[2] = new Snorlax("Warto");
 		pokemons[3] = new Jigglypuff("Jiggly");
 		pokemons[4] = new Meowth("Meowth");
 		pokemons[5] = new Lapras("Lapras");
