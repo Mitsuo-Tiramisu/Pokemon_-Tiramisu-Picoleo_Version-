@@ -5,7 +5,11 @@ public class Mapa{
   int MAX_Y;
   int Atual_X;
   int Atual_Y;
-  int terreno [][];  //0-Comum,  1-Grama
+  int terreno [][] = {
+    {0,1,0},
+    {1,0,1},
+    {0,1,0}
+  };  //0-Comum,  1-Grama
   public Mapa(int X, int Y, int mapinha[][]){
     this.MAX_X = X;
     this.MAX_Y = Y;
@@ -14,25 +18,35 @@ public class Mapa{
         this.terreno[i][j] = mapinha[i][j];
       }
     }
+    this.Atual_Y = Y/2;
+    this.Atual_X = X/2;
   }
   public void andar(int direcao,int sentido){ // 0-X, 1-Y
     if(direcao == 1){
       if(sentido == 1){
-        if(Atual_Y<MAX_Y)
+        if(this.Atual_Y+1< this.MAX_Y){
           this.Atual_Y++;
+          System.out.println("Voce andou para cima");
+        }
       }
       else
-        if(Atual_Y>0)
+        if(this.Atual_Y>0){
           this.Atual_Y--;
+          System.out.println("Voce andou para baixo");
+        }
     }
     else{
       if(sentido == 1){
-        if(Atual_X<MAX_X)
+        if(this.Atual_X+1<this.MAX_X){
           this.Atual_X++;
+          System.out.println("Voce andou para direita");
+        }
       }
       else
-        if(Atual_X>0)
+        if(this.Atual_X>0){
           this.Atual_X--;
+          System.out.println("Voce andou para esquerda");
+        }
     }
   }
 
@@ -41,17 +55,22 @@ public class Mapa{
     int passos = 0;
     Random r = new Random();
     Selvagem wild;
-    int mapinha[][] = {{0,1,0},{1,0,1},{0,1,0}};
-    Mapa maps = new Mapa(3,3,mapinha);
+    int mapinha[][] = {
+      {0,1,0},
+      {1,0,1},
+      {0,1,0}
+    };
+    Mapa maps = new Mapa(3,3, mapinha);
     Evento encontro;
     Treinador2 mit = new Treinador2("Mit");
     while(passos < 15){
       passos ++;
       wild = new Selvagem ();
       int a, b, c;
-      a = r.nextInt(1);
-      b = r.nextInt(1);
-      c = r.nextInt(3);
+      a = r.nextInt(2);
+      b = r.nextInt(2);
+      c = r.nextInt(4);
+      System.out.println(c+""+a+""+b);
       maps.andar(a,b);
       if (maps.terreno[maps.Atual_X][maps.Atual_Y] == 1){
         if(c < 1){
