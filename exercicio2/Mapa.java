@@ -61,6 +61,7 @@ public class Mapa{
 		int passos = 0;
 		Random r = new Random();
 		Selvagem wild;
+		Event e1;
 		int mapinha[][] = {
 			{0,1,1,1,0},
 			{1,0,1,1,1},
@@ -80,10 +81,20 @@ public class Mapa{
 			maps.andar(a,b);
 			if (maps.terreno[maps.Atual_X][maps.Atual_Y] == 1){
 				if(c < 1){
-					Batalha.executar(mit, wild);
+					e1 = new Encontro(0);
+					e1.action(mit, wild);
 				}
 			}
 		}
+	}
+}
+
+class Encontro extends Event{
+	public Encontro (int prioridade){
+    super(prioridade);
+  }
+	public void action(Treinador mit, Treinador wild){
+		Batalha.executar(mit, wild);
 	}
 }
 
