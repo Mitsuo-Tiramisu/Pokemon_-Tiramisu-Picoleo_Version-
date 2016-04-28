@@ -1,16 +1,11 @@
+package exercicio2;
 class Batalha {
+
 	
-	public static void Atacando(Treinador t, Pokemon adversario){
-		System.out.println(t.pokemonAtual.nome+" usou "+t.ataqueAtual+" causando "+t.dano+" de dano!");
-		adversario.ferido(t.dano);
-	}
-	
-	public static void main(String[] args){
+	public static void executar(Treinador t1, Treinador t2){
 		
 		boolean flag = true, morreu = false;
 		int escolha1,escolha2;
-		Treinador1 t1 = new Treinador1("Leo");
-		Treinador2 t2 = new Treinador2("Mit");
 		Event e1 = null,e2 = null;
 		
 		t1.euEscolhoVoce();
@@ -69,7 +64,7 @@ class Batalha {
 			}
 			
 			if(escolha2 == 2){
-				e2 = new Curar(2);
+				escolha2 = 3;
 			}
 			
 			if(escolha1 == 3){
