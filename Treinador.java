@@ -88,7 +88,7 @@ class Treinador2 extends Treinador{
 		super(nome);
 		pokemons[0] = new Hitmonchan("Hitmon");
 		pokemons[1] = new Charizard("Chari");
-		pokemons[2] = new Wartortle("Marto");
+		pokemons[2] = new Wartortle("Warto");
 		pokemons[3] = new Jigglypuff("Jiggly");
 		pokemons[4] = new Meowth("Meowth");
 		pokemons[5] = new Lapras("Lapras");

@@ -20,8 +20,13 @@ class Batalha {
 		t2.defineAtaque(t1.pokemonAtual);
 		
 		while(flag){
+			
+			t1.pokemonAtual.imprimeVida();
+			t2.pokemonAtual.imprimeVida();
+			
 			escolha1 = t1.oQueFarei();
 			escolha2 = t2.oQueFarei();
+
 			
 			if(escolha1 == 0){
 				System.out.println("O treinador "+t2.nome+" venceu a partida!");
@@ -37,23 +42,28 @@ class Batalha {
 				
 				if(escolha1 == 1){
 					t2.defineAtaque(t1.pokemonAtual);
+					escolha1 = 3;
 				}
 				
 				if(escolha2 == 1){
 					t1.defineAtaque(t2.pokemonAtual);
+					escolha2 = 3;
 				}
 				
 				if(escolha1 == 3){
-					Batalha.Atacando(t1, t2.pokemonAtual);
+					if(t1.pokemonAtual.atualHP > 0){
+						Batalha.Atacando(t1, t2.pokemonAtual);
+					}
 				}
 				
 				if(escolha2 == 3){
-					Batalha.Atacando(t2, t1.pokemonAtual);
+					if(t2.pokemonAtual.atualHP > 0){
+						Batalha.Atacando(t2, t1.pokemonAtual);
+					}
 
 				}
 				
 			}
-			
 		}
 		
 	}

@@ -4,17 +4,7 @@ abstract class Pokemon {
 	int maxHP,atualHP;
 	int tipo;
 	Ataque[] ataques = new Ataque[4];
-	static final int NORMAL=1,FIRE=2,WATER=3,ELETRIC=4,GRASS=5,FIGHTING=6,FLYING=7,PSYCHIC=8;
-	int efectividade[][] = {
-			{0,  0,  0,  0,  0,  0,  0,  0},//NORMAL
-			{0, -1, -1,  0,  1,  0,  0,  0},//FIRE
-			{0,  1, -1,  0, -1,  0,  0,  0},//WATER
-			{0,  0,  1, -1, -1,  0,  1,  0},//ELETRIC
-			{0, -1,  1,  0, -1,  0, -1,  0},//GRASS
-			{1,  0,  0,  0,  0,  0, -1, -1},//FIGHTING
-			{0,  0,  0, -1,  1,  1,  0,  0},//FLYING
-			{0,  0,  0,  0,  0,  1,  0, -1} //PSYCHIC
-		};
+	static final int NORMAL=0,FIRE=1,WATER=2,ELETRIC=3,GRASS=4,FIGHTING=5,FLYING=6,PSYCHIC=7;
 
 	public Pokemon(String nome, int HP, int tipo){
 
@@ -40,6 +30,10 @@ abstract class Pokemon {
 		}
 	}
 
+	public void imprimeVida() {
+		System.out.println(nome+" esta com "+atualHP+" de HP!");
+	}
+
 }
 
 class Ataque {
@@ -53,6 +47,7 @@ class Ataque {
 		this.nome = nome;
 		this.tipo = tipo;
 		this.dano = dano;
+		this.dano = dano/5;
 
 	}
 }
